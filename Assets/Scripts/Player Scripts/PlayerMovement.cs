@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 	private float jumpPower = 12f;
 
 	void Awake() {
-		myBody.GetComponent<Rigidbody2D>();
+		myBody = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator> ();
 	}
 
@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		//Check if the player is grounded here to ensure the player is not jumping mid air
-		//Make the player jump
+		CheckIfGrounded();
+		PlayerJump();
 	}
 
 	void FixedUpdate() {
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void PlayerWalk() {
 
-		float h = Input.GetAxis("0"); //replace "0" as the value of float h with the correct axis of movement.
+		float h = Input.GetAxis("Horizontal"); //replace "0" as the value of float h with the correct axis of movement.
 		//Note: The value of h must use the right and left arrow or "a" and "d" keys to move the player
 		//right and left.
 
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 	//Make the player jump
 	void PlayerJump() {
 		if (isGrounded) {
-			if (/*Use the spacebar to make the player jump. Delete "jumped" after this comment*/jumped) {
+			if (Input.GetButtonDown("Jump")) {
 				jumped = true;
 				myBody.linearVelocity = new Vector2 (myBody.linearVelocity.x, jumpPower);
 
