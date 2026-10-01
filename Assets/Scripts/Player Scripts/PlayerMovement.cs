@@ -15,6 +15,12 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isGrounded;
 	private bool jumped;
 
+	private float controlLockTimer;
+
+	public void LockControls (float duration) {
+		controlLockTimer = duration;
+	}
+
 	private float jumpPower = 12f;
 
 	void Awake() {
@@ -27,6 +33,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
+		if (controlLockTimer > 0f) {
+			controlLockTimer -= Time.deltaTime;
+		}
 		CheckIfGrounded();
 		PlayerJump();
 	}
@@ -37,7 +46,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	void PlayerWalk() {
 
-		float h = Input.GetAxis("Horizontal"); //replace "0" as the value of float h with the correct axis of movement.
+		float h = 0f;
+		if (controlLockTimer <= 0f) {
+			h = Input.GetAxis("Horizontal"); //replace "0" as the value of float h with the correct axis of movement.
+		}
 		//Note: The value of h must use the right and left arrow or "a" and "d" keys to move the player
 		//right and left.
 
@@ -84,7 +96,7 @@ public class PlayerMovement : MonoBehaviour {
 	//Make the player jump
 	void PlayerJump() {
 		if (isGrounded) {
-			if (Input.GetButtonDown("Jump")) {
+			if (controlLockTimer <= 0f && Input.GetButtonDown("Jump")) {
 				jumped = true;
 				myBody.linearVelocity = new Vector2 (myBody.linearVelocity.x, jumpPower);
 
