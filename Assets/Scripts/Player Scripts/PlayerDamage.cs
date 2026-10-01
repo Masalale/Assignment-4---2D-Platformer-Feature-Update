@@ -55,48 +55,7 @@ public class PlayerDamage : MonoBehaviour {
 
 	IEnumerator RestartGame() {
 		yield return new WaitForSecondsRealtime(2f);
-		SceneManager.LoadScene ("Gameplay");
+		SceneManager.LoadScene ("GameScene-ALU");
 	}
 
 } // class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
