@@ -10,6 +10,7 @@ public class SpiderScript : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.down;
 
 	private string coroutine_Name = "ChangeMovement";
+	private bool isDead;
 
 	void Awake() {
 		anim = GetComponent<Animator> ();
@@ -49,6 +50,7 @@ public class SpiderScript : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D target) {
 		if (target.tag == MyTags.BULLET_TAG) {
 			anim.Play ("SpiderDead");
+			isDead = true;
 
 			myBody.bodyType = RigidbodyType2D.Dynamic;
 
@@ -57,7 +59,7 @@ public class SpiderScript : MonoBehaviour {
 
 		}
 
-		if (target.tag == MyTags.PLAYER_TAG) {
+		if (target.tag == MyTags.PLAYER_TAG && !isDead) {
 			target.GetComponent<PlayerDamage> ().DealDamage ();
 		}
 	}
