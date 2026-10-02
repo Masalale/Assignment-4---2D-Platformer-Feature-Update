@@ -65,4 +65,5 @@ Add it through Unity Hub and open `Assets/Scenes/StartScene.unity`. That's the o
 | :--- | :--- |
 | Art, enemies, tiles | From the asset pack linked in the assignment brief |
 | Sounds | `coin.ogg`, came with the pack |
+| Music | Mountain by Nebulite, [freetouse.com/music](https://freetouse.com/music) (copyright free) |
 | UI | Unity TextMeshPro |
