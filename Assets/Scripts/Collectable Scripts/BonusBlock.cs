@@ -38,7 +38,10 @@ public class BonusBlock : MonoBehaviour {
 
 			if (hit) {
 				if (hit.collider.gameObject.tag == MyTags.PLAYER_TAG) {
-					// increase score
+					ScoreManager score = hit.collider.gameObject.GetComponent<ScoreManager> ();
+					if (score != null) {
+						score.AddScore (1);
+					}
 					anim.Play("BlockIdle");
 					startAnim = true;
 					canAnimate = false;

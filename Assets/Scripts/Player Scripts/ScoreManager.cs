@@ -9,6 +9,12 @@ public class ScoreManager : MonoBehaviour {
 	private AudioSource audioManager;
 	private int scoreCount;
 
+	public void AddScore (int amount) {
+		scoreCount += amount;
+		coinTextScore.text = "x" + scoreCount;
+		audioManager.Play ();
+	}
+
 	void Awake() {
 		audioManager = GetComponent<AudioSource> ();
 	}
