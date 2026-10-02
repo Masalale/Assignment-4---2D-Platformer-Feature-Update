@@ -79,7 +79,14 @@ public class PlayerMovement : MonoBehaviour {
 
 	//Checking if the player is on the ground
 	void CheckIfGrounded() {
-		isGrounded = Physics2D.Raycast (groundCheckPosition.position, Vector2.down, 0.1f, groundLayer);
+		isGrounded = false;
+		RaycastHit2D[] hits = Physics2D.RaycastAll (groundCheckPosition.position, Vector2.down, 0.2f, groundLayer);
+		foreach (RaycastHit2D hit in hits) {
+			if (!hit.collider.isTrigger) {
+				isGrounded = true;
+				break;
+			}
+		}
 
 		if (isGrounded) {
 			// and we jumped before
