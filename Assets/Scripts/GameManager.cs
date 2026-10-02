@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -13,6 +14,14 @@ public class GameManager : MonoBehaviour {
 	[Header("Scenes")]
 	public string gameplaySceneName = "GameScene-ALU";
 	public string endSceneName = "EndScene";
+	public string mainMenuSceneName = "StartScene";
+
+	[Header("Pause")]
+	public GameObject pauseMenuCanvas;
+
+	[Header("Run Timer")]
+	private float elapsed;
+	private TextMeshProUGUI timerText;
 
 	private GameObject player;
 	private PlayerDamage playerDamage;
@@ -27,6 +36,43 @@ public class GameManager : MonoBehaviour {
 			playerDamage = player.GetComponent<PlayerDamage> ();
 			playerMovement = player.GetComponent<PlayerMovement> ();
 		}
+
+		elapsed = 0f;
+		GameObject timerObj = GameObject.Find ("TimerText");
+		if (timerObj != null) {
+			timerText = timerObj.GetComponent<TextMeshProUGUI> ();
+		}
+		UpdateTimerText ();
+	}
+
+	void Update () {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			TogglePause ();
+		}
+
+		elapsed += Time.deltaTime;
+		UpdateTimerText ();
+	}
+
+	void UpdateTimerText () {
+		if (timerText != null) {
+			int minutes = Mathf.FloorToInt (elapsed / 60f);
+			int seconds = Mathf.FloorToInt (elapsed % 60f);
+			timerText.text = minutes.ToString ("00") + ":" + seconds.ToString ("00");
+		}
+	}
+
+	public void TogglePause () {
+		bool paused = Time.timeScale == 0f;
+		Time.timeScale = paused ? 1f : 0f;
+		if (pauseMenuCanvas != null) {
+			pauseMenuCanvas.SetActive (!paused);
+		}
+	}
+
+	public void QuitToMenu () {
+		Time.timeScale = 1f;
+		SceneManager.LoadScene (mainMenuSceneName);
 	}
 
 	void OnTriggerEnter2D (Collider2D target) {
