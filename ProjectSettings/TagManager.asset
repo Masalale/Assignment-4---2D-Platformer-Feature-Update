@@ -14,6 +14,7 @@ TagManager:
   - Ground
   - Water
   - Frog
+  - Bird
   layers:
   - Default
   - TransparentFX
