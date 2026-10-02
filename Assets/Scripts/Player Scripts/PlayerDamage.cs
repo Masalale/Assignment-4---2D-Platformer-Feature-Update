@@ -9,6 +9,8 @@ public class PlayerDamage : MonoBehaviour {
 	private Text lifeText;
 	private int lifeScoreCount;
 
+	public string endSceneName = "EndScene";
+
 	private bool canDamage;
 
 	public int LivesRemaining {
@@ -55,7 +57,7 @@ public class PlayerDamage : MonoBehaviour {
 
 	IEnumerator RestartGame() {
 		yield return new WaitForSecondsRealtime(2f);
-		SceneManager.LoadScene ("GameScene-ALU");
+		SceneManager.LoadScene (endSceneName);
 	}
 
 } // class

@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D target) {
+		if (target.CompareTag (MyTags.FINISH_TAG)) {
+			SceneManager.LoadScene (endSceneName);
+			return;
+		}
 		if (target.gameObject.layer == waterLayer) {
 			TryWaterRespawn (target);
 		}
@@ -90,7 +94,11 @@ public class GameManager : MonoBehaviour {
 
 	// Wire to the Quit button onClick in the End scene.
 	public void QuitGame () {
+		#if UNITY_EDITOR
+		UnityEditor.EditorApplication.ExitPlaymode ();
+		#else
 		Application.Quit ();
+		#endif
 	}
 
 } // class

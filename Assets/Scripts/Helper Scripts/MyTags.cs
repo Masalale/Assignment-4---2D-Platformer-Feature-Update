@@ -13,4 +13,6 @@ public class MyTags : MonoBehaviour {
 	public static string SPIDER_TAG = "Spider";
 	public static string BOSS_TAG = "Boss";
 
+	public static string FINISH_TAG = "Finish";
+
 }
