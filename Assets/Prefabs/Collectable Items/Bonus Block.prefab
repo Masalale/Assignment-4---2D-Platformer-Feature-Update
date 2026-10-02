@@ -178,7 +178,7 @@ MonoBehaviour:
   bottom_Collision: {fileID: 4153857550127738}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 513
 --- !u!1 &1814487319435504
 GameObject:
   m_ObjectHideFlags: 0
